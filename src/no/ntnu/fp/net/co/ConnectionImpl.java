@@ -7,6 +7,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.Collections;
@@ -38,6 +39,8 @@ public class ConnectionImpl extends AbstractConnection {
 
     /** Keeps track of the used ports for each server port. */
     private static Map<Integer, Boolean> usedPorts = Collections.synchronizedMap(new HashMap<Integer, Boolean>());
+    private ClSocket mySocket;
+    private boolean stop = true;
 
     /**
      * Initialise initial sequence number and setup state machine.
@@ -46,7 +49,8 @@ public class ConnectionImpl extends AbstractConnection {
      *            - the local port to associate with this connection
      */
     public ConnectionImpl(int myPort) {
-        throw new NotImplementedException();
+    	this.myPort = myPort;
+//        throw new NotImplementedException();
     }
 
     private String getIPv4Address() {
@@ -73,7 +77,14 @@ public class ConnectionImpl extends AbstractConnection {
      */
     public void connect(InetAddress remoteAddress, int remotePort) throws IOException,
             SocketTimeoutException {
-        throw new NotImplementedException();
+    	
+    	System.out.println("Trying to connect to: "+remoteAddress.getHostAddress()+" : "+remotePort);
+    	mySocket = new ClSocket();
+    	
+    	stop = false;
+    	 
+    	
+//        throw new NotImplementedException();
     }
 
     /**
@@ -102,7 +113,21 @@ public class ConnectionImpl extends AbstractConnection {
      * @see no.ntnu.fp.net.co.Connection#send(String)
      */
     public void send(String msg) throws ConnectException, IOException {
-        throw new NotImplementedException();
+    	KtnDatagram datagram = new KtnDatagram();
+    	datagram.setDest_addr(remoteAddress);
+    	datagram.setDest_port(remotePort);
+    	datagram.setSrc_addr(myAddress);
+    	datagram.setSrc_port(myPort);
+    	datagram.setFlag(Flag.NONE);
+    	datagram.setSeq_nr(nextSequenceNo++);
+    	datagram.setPayload(msg);
+    	datagram.setChecksum(datagram.getChecksum());
+    	try {
+			mySocket.send(datagram);
+		} catch (ClException e) {
+			e.printStackTrace();
+		}
+//        throw new NotImplementedException();
     }
 
     /**
@@ -114,7 +139,12 @@ public class ConnectionImpl extends AbstractConnection {
      * @see AbstractConnection#sendAck(KtnDatagram, boolean)
      */
     public String receive() throws ConnectException, IOException {
-        throw new NotImplementedException();
+    	while (!stop) {
+    		KtnDatagram datagram = mySocket.receive(myPort);
+    		System.out.println("Received the text: "+ datagram.getPayload().toString());
+    		return datagram.getPayload().toString();
+    	}
+        throw new IOException("Can't receive. The connection is not established!");
     }
 
     /**
