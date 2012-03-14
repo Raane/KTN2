@@ -21,6 +21,7 @@ import no.ntnu.fp.net.cl.ClException;
 import no.ntnu.fp.net.cl.ClSocket;
 import no.ntnu.fp.net.cl.KtnDatagram;
 import no.ntnu.fp.net.cl.KtnDatagram.Flag;
+import no.ntnu.fp.net.co.AbstractConnection.State;
 
 /**
  * Implementation of the Connection-interface. <br>
@@ -49,8 +50,16 @@ public class ConnectionImpl extends AbstractConnection {
      *            - the local port to associate with this connection
      */
     public ConnectionImpl(int myPort) {
+    	super();
     	this.myPort = myPort;
-//        throw new NotImplementedException();
+    	myAddress = getIPv4Address();
+    }
+    
+    public ConnectionImpl setupListenConnection(int listenPort) {
+    	ConnectionImpl listenConnection = new ConnectionImpl(listenPort);
+    	listenConnection.state = State.LISTEN;
+    	
+    	return listenConnection;
     }
 
     private String getIPv4Address() {
@@ -62,8 +71,6 @@ public class ConnectionImpl extends AbstractConnection {
         }
     }
     
-    //Changes!!
-
     /**
      * Establish a connection to a remote location.
      * 
@@ -80,13 +87,51 @@ public class ConnectionImpl extends AbstractConnection {
     public void connect(InetAddress remoteAddress, int remotePort) throws IOException,
             SocketTimeoutException {
     	
+    	//TODO: Include packet checking? It seems to recommend against it in this state.
+    	//Check the comments of the isValid method
+    	
     	System.out.println("Trying to connect to: "+remoteAddress.getHostAddress()+" : "+remotePort);
-    	mySocket = new ClSocket();
     	
-    	stop = false;
-    	 
+    	//Connect should only be called if the connection is closed.
+    	if (state != State.CLOSED) {
+            throw new IllegalStateException("Should only be used in CLOSED state.");
+    	}
     	
-//        throw new NotImplementedException();
+    	//Constructs an internal packet using a convenient utility function
+    	KtnDatagram synPacket = constructInternalPacket(Flag.SYN);
+    	
+    	
+    	//Tries to send the packet, and sets the state accordingly
+    	try {
+			mySocket.send(synPacket);
+	    	this.state = State.SYN_SENT;
+		} catch (ClException e) {
+			e.printStackTrace();
+		}
+    	
+    	//Now we should be in the SYN_SENT state
+    	if (state != State.SYN_SENT) {
+            throw new IllegalStateException("Error sending SYN packet");
+    	}
+            
+    	
+    	//Blocks and waits for a packet
+    	KtnDatagram ackPacket = null;
+    	
+    	//TODO: Make sure that the incoming package is the one you want. If not, continue receiving until timeout.
+    	
+    	try {
+    	ackPacket = receiveAck();
+    	} catch (IOException e) {
+    		System.out.println("Error receiving SYN_ACK");
+    	}
+    	
+    	if (ackPacket.getFlag() == Flag.SYN_ACK && ackPacket.getDest_addr() == remoteAddress.getHostAddress()) {
+    		state = State.ESTABLISHED;
+    		this.remoteAddress = remoteAddress.getHostAddress();
+    		this.remotePort = remotePort;
+    	}
+    	
     }
 
     /**
@@ -96,7 +141,36 @@ public class ConnectionImpl extends AbstractConnection {
      * @see Connection#accept()
      */
     public Connection accept() throws IOException, SocketTimeoutException {
-        throw new NotImplementedException();
+    	//This method is used by the server using a listening connection.
+    	
+    	if (state != State.LISTEN) {
+            throw new IllegalStateException("Should only be used in LISTEN state.");
+    	}
+    	
+    	
+    	//Note: The listener connection should have a unique port we know will only be used for
+    	//listening.
+    	
+    	
+    	KtnDatagram connRequest = mySocket.receive(myPort);
+    	    	
+    	if (connRequest.getFlag() == Flag.SYN) {
+    		state = State.SYN_RCVD;
+    		KtnDatagram synAck = constructInternalPacket(Flag.SYN_ACK);
+    		synAck.setDest_addr(connRequest.getSrc_addr());
+    		synAck.setDest_port(connRequest.getSrc_port());
+    		//TODO: Checksum stuff
+    		
+    		try {
+				mySocket.send(synAck);
+			} catch (ClException e) {
+				e.printStackTrace();
+			}
+    	}
+    	
+    	KtnDatagram ackPacket = receiveAck();
+    	
+    	return null;
     }
 
     /**
@@ -116,20 +190,14 @@ public class ConnectionImpl extends AbstractConnection {
      */
     public void send(String msg) throws ConnectException, IOException {
     	KtnDatagram datagram = new KtnDatagram();
-    	datagram.setDest_addr(remoteAddress);
-    	datagram.setDest_port(remotePort);
-    	datagram.setSrc_addr(myAddress);
-    	datagram.setSrc_port(myPort);
-    	datagram.setFlag(Flag.NONE);
-    	datagram.setSeq_nr(nextSequenceNo++);
-    	datagram.setPayload(msg);
-    	datagram.setChecksum(datagram.getChecksum());
+    	datagram = constructDataPacket(msg);
+    	datagram.setChecksum(datagram.calculateChecksum());
+    	
     	try {
 			mySocket.send(datagram);
 		} catch (ClException e) {
 			e.printStackTrace();
 		}
-//        throw new NotImplementedException();
     }
 
     /**
@@ -167,6 +235,7 @@ public class ConnectionImpl extends AbstractConnection {
      * @return true if packet is free of errors, false otherwise.
      */
     protected boolean isValid(KtnDatagram packet) {
-        throw new NotImplementedException();
+    	
+    	return packet.getChecksum() == packet.calculateChecksum();
     }
 }
