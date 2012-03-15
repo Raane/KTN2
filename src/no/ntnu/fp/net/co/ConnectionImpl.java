@@ -53,9 +53,10 @@ public class ConnectionImpl extends AbstractConnection {
     	super();
     	this.myPort = myPort;
     	myAddress = getIPv4Address();
+    	mySocket = new ClSocket();
     }
     
-    public ConnectionImpl setupListenConnection(int listenPort) {
+    public static ConnectionImpl setupListenConnection(int listenPort) {
     	ConnectionImpl listenConnection = new ConnectionImpl(listenPort);
     	listenConnection.state = State.LISTEN;
     	
@@ -142,7 +143,6 @@ public class ConnectionImpl extends AbstractConnection {
      */
     public Connection accept() throws IOException, SocketTimeoutException {
     	//This method is used by the server using a listening connection.
-    	
     	if (state != State.LISTEN) {
             throw new IllegalStateException("Should only be used in LISTEN state.");
     	}
@@ -234,8 +234,5 @@ public class ConnectionImpl extends AbstractConnection {
      *            Packet to test.
      * @return true if packet is free of errors, false otherwise.
      */
-    protected boolean isValid(KtnDatagram packet) {
-    	
-    	return packet.getChecksum() == packet.calculateChecksum();
-    }
+    protected boolean isValid(KtnDatagram packet) {return packet.getChecksum() == packet.calculateChecksum();} //HELL YEA ONE LINER!
 }

@@ -40,17 +40,17 @@ public class ChatClient {
 
     private Connection connection;
 
-    private static boolean SIMPLE_CONNECTION = true;
+    private static boolean SIMPLE_CONNECTION = false;
 
     public ChatClient(String address, int port) {
         port_to_server = port;
         addressServer= address;
-        connection = new SimpleConnection(thisPort);
-        /*if (SIMPLE_CONNECTION) {
+//        connection = new SimpleConnection(thisPort);
+        if (SIMPLE_CONNECTION) {
             connection = new SimpleConnection(thisPort);
         } else {
             connection = new ConnectionImpl(thisPort);
-        }*/
+        }
         //	  this.username = JOptionPane.showInputDialog(gui,"Skriv inn
         // navn:");
         gui = new Gui("Chat klient laget av Geir", this);

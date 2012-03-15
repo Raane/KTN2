@@ -171,12 +171,13 @@ public class ChatServer extends JFrame {
         }
         users = new ArrayList();
 
-        server = new SimpleConnection(listenPort);
-        /*if (SIMPLE_CONNECTION)
+//        server = new SimpleConnection(listenPort);
+        if (SIMPLE_CONNECTION)
             server = new SimpleConnection(listenPort);
         else
-            server = new ConnectionImpl(listenPort);*/
-
+            server = ConnectionImpl.setupListenConnection(listenPort);
+//        	server = new ConnectionImpl(listenPort);
+        
         Thread listener = new Thread() {
 
             private Connection newConn;
