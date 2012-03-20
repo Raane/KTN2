@@ -189,7 +189,7 @@ public class ChatServer extends JFrame {
                     try {
                         DBG("Server lytter på:" + listenPort);
                         newConn = server.accept();
-                        message = newConn.receive();
+                        message = newConn.receive(); //TODO nullpointer (?)
 
                         if (message.substring(0, 6).equals("Hello:")) {
                             User newUser;

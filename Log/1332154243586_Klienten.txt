@@ -1,0 +1,17 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+11:50:43.971     NETWORK                                                                                                                                 Packet 8215 send!                                 
+11:50:43.975     AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+11:50:43.985     CLSocket::receive                                                                                                                       Receiving at:5555                                 
+11:50:44.9       CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:61278
+11:50:44.20      CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+11:50:44.23      AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+11:50:44.27      NETWORK                                                                                                                                 Packet 8216 send!                                 

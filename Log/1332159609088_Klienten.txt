@@ -1,0 +1,17 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+13:20:9.453      NETWORK                                                                                                                                 Packet 5956 send!                                 
+13:20:9.454      AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+13:20:9.458      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+13:20:9.482      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:61970
+13:20:9.488      CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+13:20:9.489      AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+13:20:9.493      NETWORK                                                                                                                                 Packet 5957 send!                                 

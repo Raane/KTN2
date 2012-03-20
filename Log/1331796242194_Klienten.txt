@@ -1,0 +1,17 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+8:24:2.596       NETWORK                                                                                                                                 Packet 9398 send!                                 
+8:24:2.609       AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+8:24:2.615       CLSocket::receive                                                                                                                       Receiving at:5555                                 
+8:24:2.638       CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:58936
+8:24:2.645       CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+8:24:2.647       AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+8:24:2.652       NETWORK                                                                                                                                 Packet 9399 send!                                 

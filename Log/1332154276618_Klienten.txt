@@ -1,0 +1,17 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+11:51:17.61      NETWORK                                                                                                                                 Packet 1853 send!                                 
+11:51:17.64      AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+11:51:17.67      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+11:51:17.94      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:61281
+11:51:17.100     CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+11:51:17.102     AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+11:51:17.106     NETWORK                                                                                                                                 Packet 1854 send!                                 

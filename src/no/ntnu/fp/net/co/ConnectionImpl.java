@@ -98,12 +98,15 @@ public class ConnectionImpl extends AbstractConnection {
             throw new IllegalStateException("Should only be used in CLOSED state.");
     	}
     	
-    	//Constructs an internal packet using a convenient utility function
-    	KtnDatagram synPacket = constructInternalPacket(Flag.SYN);
+    	this.remoteAddress = remoteAddress.getHostAddress();
+    	this.remotePort = remotePort;
     	
+    	//Constructs an internal packet using a convenient utility function	
+    	KtnDatagram synPacket = constructInternalPacket(Flag.SYN);
     	
     	//Tries to send the packet, and sets the state accordingly
     	try {
+    		System.out.println("mySocket: " + mySocket);
 			mySocket.send(synPacket);
 	    	this.state = State.SYN_SENT;
 		} catch (ClException e) {
@@ -114,25 +117,30 @@ public class ConnectionImpl extends AbstractConnection {
     	if (state != State.SYN_SENT) {
             throw new IllegalStateException("Error sending SYN packet");
     	}
-            
     	
     	//Blocks and waits for a packet
-    	KtnDatagram ackPacket = null;
+    	KtnDatagram synAckPacket = null;
     	
     	//TODO: Make sure that the incoming package is the one you want. If not, continue receiving until timeout.
     	
     	try {
-    	ackPacket = receiveAck();
+    		synAckPacket = receiveAck();
     	} catch (IOException e) {
     		System.out.println("Error receiving SYN_ACK");
     	}
-    	
-    	if (ackPacket.getFlag() == Flag.SYN_ACK && ackPacket.getDest_addr() == remoteAddress.getHostAddress()) {
-    		state = State.ESTABLISHED;
+    	KtnDatagram ackPacket = constructInternalPacket(Flag.ACK);
+    	//Tries to send the packet, and sets the state accordingly
+    	try {
+    		mySocket.send(ackPacket);
+    	} catch (ClException e) {
+    		e.printStackTrace();
+    	}
+    	if (synAckPacket.getFlag() == Flag.SYN_ACK && synAckPacket.getDest_addr() == remoteAddress.getHostAddress()) {
     		this.remoteAddress = remoteAddress.getHostAddress();
     		this.remotePort = remotePort;
     	}
-    	
+		state = State.ESTABLISHED;
+		stop = false;
     }
 
     /**
@@ -170,7 +178,12 @@ public class ConnectionImpl extends AbstractConnection {
     	
     	KtnDatagram ackPacket = receiveAck();
     	
-    	return null;
+    	if (ackPacket.getFlag() == Flag.ACK) {
+    		state = State.ESTABLISHED;
+    		stop = false;
+    	}
+    	
+    	return this;  //TODO put new shit here
     }
 
     /**
@@ -212,6 +225,12 @@ public class ConnectionImpl extends AbstractConnection {
     	while (!stop) {
     		KtnDatagram datagram = mySocket.receive(myPort);
     		System.out.println("Received the text: "+ datagram.getPayload().toString());
+    		KtnDatagram ackPacket = constructInternalPacket(Flag.ACK);
+        	try {
+        		mySocket.send(ackPacket);
+        	} catch (ClException e) {
+        		e.printStackTrace();
+        	}
     		return datagram.getPayload().toString();
     	}
         throw new IOException("Can't receive. The connection is not established!");

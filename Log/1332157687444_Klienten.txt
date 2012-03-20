@@ -1,0 +1,18 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+12:48:7.806      NETWORK                                                                                                                                 Packet 1805 send!                                 
+12:48:7.819      AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+12:48:7.841      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+12:48:7.863      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:61771
+12:48:7.870      CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+12:48:7.874      AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+12:48:7.879      NETWORK                                                                                                                                 Packet 1806 send!                                 
+12:48:10.533     NETWORK                                                                                                                                 Packet 1807 send!                                 

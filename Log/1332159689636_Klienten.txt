@@ -1,0 +1,17 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+13:21:29.986     NETWORK                                                                                                                                 Packet 6288 send!                                 
+13:21:29.988     AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+13:21:29.991     CLSocket::receive                                                                                                                       Receiving at:5555                                 
+13:21:30.11      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:61977
+13:21:30.17      CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+13:21:30.20      AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+13:21:30.25      NETWORK                                                                                                                                 Packet 6289 send!                                 
