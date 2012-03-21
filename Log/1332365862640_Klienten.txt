@@ -1,0 +1,20 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+22:37:43.14      NETWORK                                                                                                                                 Packet 4332 send!                                 
+22:37:43.16      AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+22:37:43.20      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+22:37:43.43      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:58438
+22:37:43.51      CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+22:37:43.54      AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+22:37:43.57      NETWORK                                                                                                                                 Packet 4333 send!                                 
+22:37:43.164     NETWORK                                                                                                                                 Packet 4334 send!                                 
+22:37:43.166     CLSocket::receive                                                                                                                       Receiving at:5555                                 
+22:37:43.172     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        

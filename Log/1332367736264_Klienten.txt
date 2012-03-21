@@ -1,0 +1,42 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+23:8:56.648      NETWORK                                                                                                                                 Packet 3703 send!                                 
+23:8:56.650      AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+23:8:56.658      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+23:8:56.684      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:58534
+23:8:56.690      CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+23:8:56.692      AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+23:8:56.696      NETWORK                                                                                                                                 Packet 3704 send!                                 
+23:8:56.799      NETWORK                                                                                                                                 Packet 3705 send!                                 
+23:8:56.800      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+23:8:56.802      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+23:8:56.808      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:58537
+23:8:56.842      CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+23:8:56.846      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+23:8:56.847      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+23:8:58.814      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:58538
+23:8:58.819      CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+23:8:58.836      NETWORK                                                                                                                                 Packet 3706 send!                                 
+23:9:0.876       CLSocket::receive                                                                                                                       Receiving at:5555                                 
+23:9:0.896       CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+23:48:10.953     NETWORK                                                                                                                                 Packet 3707 send!                                 
+23:48:10.957     CLSocket::receive                                                                                                                       Receiving at:5555                                 
+23:48:10.960     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        

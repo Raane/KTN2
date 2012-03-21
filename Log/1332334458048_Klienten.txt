@@ -1,0 +1,12 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+13:54:18.470     NETWORK                                                                                                                                 Packet 8942 send!                                 
+13:54:18.472     AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+13:54:18.475     CLSocket::receive                                                                                                                       Receiving at:5555                                 
+13:54:18.478     ClSocketReceiver                                                                                                                        Exception while receiving: Address already in use: JVM_Bind
+13:54:18.482     NETWORK                                                                                                                                 Packet 8943 send!                                 
+13:54:20.489     NETWORK                                                                                                                                 Packet 8944 send!                                 
+13:54:20.491     CLSocket::receive                                                                                                                       Receiving at:5555                                 

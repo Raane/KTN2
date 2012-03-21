@@ -1,0 +1,20 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+15:9:50.90       NETWORK                                                                                                                                 Packet 1220 send!                                 
+15:9:50.143      AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+15:9:50.147      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+15:9:50.164      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:56799
+15:9:50.180      CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+15:9:50.205      AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+15:9:50.266      NETWORK                                                                                                                                 Packet 1221 send!                                 
+15:9:52.277      NETWORK                                                                                                                                 Packet 1222 send!                                 
+15:9:52.280      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+15:9:52.283      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        

@@ -1,0 +1,41 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4:33:1.174       CLSocket::receive                                                                                                                       Receiving at:4444                                 
+4:33:4.455       CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 4444
+Remote Port:53456
+4:33:4.499       CLSocket::receive                                                                                                                       Finished receiving at:4444                        
+4:33:5.16        NETWORK                                                                                                                                 Packet 6782 send!                                 
+4:33:5.30        CLSocket::receive                                                                                                                       Receiving at:4444                                 
+4:33:5.32        CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+4:33:5.40        CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 4444
+Remote Port:53458
+4:33:5.45        CLSocket::receive                                                                                                                       Finished receiving at:4444                        
+4:33:5.50        CLSocket::receive                                                                                                                       Receiving at:4444                                 
+4:33:5.52        CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+4:34:28.280      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 4444
+Remote Port:53460
+4:34:28.297      CLSocket::receive                                                                                                                       Finished receiving at:4444                        
+4:34:28.299      CLSocket::receive                                                                                                                       Receiving at:4444                                 
+4:34:28.300      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+4:34:28.308      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 4444
+Remote Port:53461
+4:34:28.312      CLSocket::receive                                                                                                                       Finished receiving at:4444                        

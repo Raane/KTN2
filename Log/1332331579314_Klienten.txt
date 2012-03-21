@@ -1,0 +1,20 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+13:6:19.736      NETWORK                                                                                                                                 Packet 7225 send!                                 
+13:6:19.738      AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+13:6:19.743      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+13:6:20.267      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:56126
+13:6:20.299      CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+13:6:20.302      AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+13:6:20.308      NETWORK                                                                                                                                 Packet 7226 send!                                 
+13:6:22.315      NETWORK                                                                                                                                 Packet 7227 send!                                 
+13:6:22.318      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+13:6:22.319      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        

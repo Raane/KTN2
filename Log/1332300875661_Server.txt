@@ -1,0 +1,32 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4:34:35.924      CLSocket::receive                                                                                                                       Receiving at:4444                                 
+4:34:37.944      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 4444
+Remote Port:53463
+4:34:37.986      CLSocket::receive                                                                                                                       Finished receiving at:4444                        
+4:34:38.8        NETWORK                                                                                                                                 Packet 4558 send!                                 
+4:34:38.8        CLSocket::receive                                                                                                                       Receiving at:4444                                 
+4:34:38.11       CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+4:34:38.21       CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 4444
+Remote Port:53465
+4:34:38.23       CLSocket::receive                                                                                                                       Finished receiving at:4444                        
+4:34:38.26       CLSocket::receive                                                                                                                       Receiving at:4444                                 
+4:34:38.31       CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+4:36:25.95       CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 4444
+Remote Port:53505
+4:36:25.114      CLSocket::receive                                                                                                                       Finished receiving at:4444                        

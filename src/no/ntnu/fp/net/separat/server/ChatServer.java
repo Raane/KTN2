@@ -140,7 +140,6 @@ public class ChatServer extends JFrame {
 	      DBG("User.send(): Disconnect requested.");
 	      this.recieveThread.run = false;
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -187,12 +186,12 @@ public class ChatServer extends JFrame {
             public void run() {
                 while (true) {
                     try {
-                        DBG("Server lytter på:" + listenPort);
+                        DBG("Server lytter pï¿½:" + listenPort);
                         newConn = server.accept();
                         DBG("connection established");
+//                        message = newConn.receive(); //TODO nullpointer (?)
                         message = newConn.receive(); //TODO nullpointer (?)
                         DBG("Messagne received");
-//                        message = server.receive(); //TODO nullpointer (?)
                         if (message.substring(0, 6).equals("Hello:")) {
                             User newUser;
                             DBG("Fikk inn connection fra: "
@@ -203,10 +202,10 @@ public class ChatServer extends JFrame {
                             broadcast(getUsers().toString());
                         }
                     } catch (SocketTimeoutException e) {
-		      DBG("startServer(): Noe gikk galt, forsøk igjen.");
+		      DBG("startServer(): Noe gikk galt, forsï¿½k igjen.");
 		      e.printStackTrace();
                     } catch (IOException e) {
-		      DBG("startServer(): Noe gikk galt, forsøk igjen.");
+		      DBG("startServer(): Noe gikk galt, forsï¿½k igjen.");
 		      e.printStackTrace();
                     }
                 }

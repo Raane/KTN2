@@ -32,7 +32,7 @@ import no.ntnu.fp.net.co.AbstractConnection.State;
  * of the functionality, leaving message passing and error handling to this
  * implementation.
  * 
- * @author Sebjørn Birkeland and Stein Jakob Nordbø
+ * @author Sebjï¿½rn Birkeland and Stein Jakob Nordbï¿½
  * @see no.ntnu.fp.net.co.Connection
  * @see no.ntnu.fp.net.cl.ClSocket
  */
@@ -153,6 +153,10 @@ public class ConnectionImpl extends AbstractConnection {
     	}*/
 		state = State.ESTABLISHED;
 		stop = false;
+		try {
+			Thread.sleep(100);  //Chillax here for a bit
+		} catch(InterruptedException e) {
+		} 
     }
 
     /**
@@ -178,7 +182,6 @@ public class ConnectionImpl extends AbstractConnection {
     		KtnDatagram synAck = constructInternalPacket(Flag.SYN_ACK);
     		synAck.setDest_addr(connRequest.getSrc_addr());
     		synAck.setDest_port(connRequest.getSrc_port());
-    		
     		//TODO: Checksum stuff
 
     		try {
@@ -190,10 +193,9 @@ public class ConnectionImpl extends AbstractConnection {
     	System.out.println("Trying to receive ACK");
 //		KtnDatagram ackPacket = receiveAck(); //Receive ACK for the SYN_ACK
 		KtnDatagram ackPacket = mySocket.receive(myPort); //Receive ACK for the SYN_ACK
-		System.out.println("ACK received" + ackPacket);
 		if (ackPacket.getFlag() == Flag.ACK) {
 			state = State.ESTABLISHED;
-			stop = false;
+			stop = false;	
 		}
     	/*try {
     		KtnDatagram ackPacket = receiveAck(); //Receive ACK for the SYN_ACK
@@ -206,8 +208,9 @@ public class ConnectionImpl extends AbstractConnection {
 			state = State.LISTEN; //No ACK, go back to listenstate
 			System.out.println("No ACK!!! State: " + state.toString());
 		}*/
-    	Connection newConnection = new ConnectionImpl(InetAddress.getByName(myAddress), myPort, InetAddress.getByName(remoteAddress), remotePort, mySocket, state);
-    	state = State.LISTEN;
+    	Connection newConnection = new ConnectionImpl(InetAddress.getByName(myAddress), myPort, InetAddress.getByName(connRequest.getSrc_addr()), connRequest.getSrc_port(), mySocket, state);
+//    	state = State.LISTEN;
+    	state = State.ESTABLISHED; //TESTING SHIT
     	return newConnection;  //TODO put new shit here
     }
 
@@ -236,6 +239,11 @@ public class ConnectionImpl extends AbstractConnection {
 		} catch (ClException e) {
 			e.printStackTrace();
 		}
+		mySocket.receive(myPort);
+		System.out.println("Ack received");
+//		} try {
+//		} catch (Exception e) {
+//		}
     }
 
     /**
@@ -249,13 +257,19 @@ public class ConnectionImpl extends AbstractConnection {
     public String receive() throws ConnectException, IOException {
     	while (!stop) {
     		KtnDatagram datagram = mySocket.receive(myPort);
-    		System.out.println("Received the text: "+ datagram.getPayload().toString());
+    		System.out.println("Received the text: " + datagram.getPayload().toString());
     		KtnDatagram ackPacket = constructInternalPacket(Flag.ACK);
         	try {
+        		System.out.println(mySocket);
         		mySocket.send(ackPacket);
         	} catch (ClException e) {
         		e.printStackTrace();
         	}
+        	try {
+    			Thread.sleep(2000);  //Chillax here for a bit
+    		} catch(InterruptedException e) {
+    		} 
+        	System.out.println("ack was sent");
     		return datagram.getPayload().toString();
     	}
         throw new IOException("Can't receive. The connection is not established!");
