@@ -1,0 +1,17 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+0:57:53.595      CLSocket::receive                                                                                                                       Receiving at:4444                                 
+0:57:56.856      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 4444
+Remote Port:52063
+0:57:56.889      CLSocket::receive                                                                                                                       Finished receiving at:4444                        
+0:57:57.402      NETWORK                                                                                                                                 Packet 9042 send!                                 
+0:57:57.407      AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+0:57:57.412      CLSocket::receive                                                                                                                       Receiving at:4444                                 
+0:57:57.422      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        

@@ -1,0 +1,19 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4:19:21.158      NETWORK                                                                                                                                 Packet 4010 send!                                 
+4:19:21.161      AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+4:19:21.171      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+4:19:21.191      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:53296
+4:19:21.198      CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+4:19:21.200      AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+4:19:21.203      NETWORK                                                                                                                                 Packet 4011 send!                                 
+4:19:21.206      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+4:19:21.208      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        

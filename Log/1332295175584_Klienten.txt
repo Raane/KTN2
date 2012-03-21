@@ -1,0 +1,27 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2:59:35.961      NETWORK                                                                                                                                 Packet 142 send!                                  
+2:59:35.963      AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+2:59:35.968      CLSocket::receive                                                                                                                       Receiving at:5555                                 
+2:59:35.989      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:52777
+2:59:35.995      CLSocket::receive                                                                                                                       Finished receiving at:5555                        
+2:59:35.996      AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+2:59:36.0        NETWORK                                                                                                                                 Packet 143 send!                                  
+2:59:36.6        NETWORK                                                                                                                                 Packet 144 send!                                  
+2:59:36.10       CLSocket::receive                                                                                                                       Receiving at:5555                                 
+2:59:36.14       CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+3:27:44.10       CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 5555
+Remote Port:52979
+3:27:44.15       CLSocket::receive                                                                                                                       Finished receiving at:5555                        

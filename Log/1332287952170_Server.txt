@@ -1,0 +1,27 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+0:59:12.455      CLSocket::receive                                                                                                                       Receiving at:4444                                 
+0:59:15.97       CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 4444
+Remote Port:52067
+0:59:15.132      CLSocket::receive                                                                                                                       Finished receiving at:4444                        
+0:59:15.149      NETWORK                                                                                                                                 Packet 3136 send!                                 
+0:59:15.149      AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+0:59:15.154      CLSocket::receive                                                                                                                       Receiving at:4444                                 
+0:59:15.157      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+0:59:15.162      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 4444
+Remote Port:52069
+0:59:15.164      CLSocket::receive                                                                                                                       Finished receiving at:4444                        
+0:59:15.167      AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+0:59:15.169      CLSocket::receive                                                                                                                       Receiving at:4444                                 
+0:59:15.172      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        

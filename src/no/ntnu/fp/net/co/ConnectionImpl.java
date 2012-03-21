@@ -62,6 +62,16 @@ public class ConnectionImpl extends AbstractConnection {
     	
     	return listenConnection;
     }
+    
+    public ConnectionImpl(InetAddress myAddress, int myPort, InetAddress remoteAddress, int remotePort,ClSocket mySocket, State state) {
+    	this.myAddress = myAddress.getHostAddress();
+    	this.myPort = myPort;
+    	this.remoteAddress = remoteAddress.getHostAddress();
+    	this.remotePort = remotePort;
+    	this.mySocket = mySocket;
+    	this.state = state;
+    	stop = false;
+	}
 
     private String getIPv4Address() {
         try {
@@ -107,8 +117,8 @@ public class ConnectionImpl extends AbstractConnection {
     	//Tries to send the packet, and sets the state accordingly
     	try {
     		System.out.println("mySocket: " + mySocket);
-			mySocket.send(synPacket);
-	    	this.state = State.SYN_SENT;
+			mySocket.send(synPacket);  //Send syn, this is the first package sent between the two connections
+	    	this.state = State.SYN_SENT;  //Sets the state to SYN_SENT
 		} catch (ClException e) {
 			e.printStackTrace();
 		}
@@ -124,21 +134,23 @@ public class ConnectionImpl extends AbstractConnection {
     	//TODO: Make sure that the incoming package is the one you want. If not, continue receiving until timeout.
     	
     	try {
-    		synAckPacket = receiveAck();
+    		synAckPacket = receiveAck();  // Receives the SYN_ACK
     	} catch (IOException e) {
     		System.out.println("Error receiving SYN_ACK");
     	}
     	KtnDatagram ackPacket = constructInternalPacket(Flag.ACK);
+		//ackPacket.setDest_addr(connRequest.getSrc_addr());
+		//ackPacket.setDest_port(connRequest.getSrc_port());
     	//Tries to send the packet, and sets the state accordingly
     	try {
-    		mySocket.send(ackPacket);
+    		mySocket.send(ackPacket);  //Sending ACK
     	} catch (ClException e) {
     		e.printStackTrace();
     	}
-    	if (synAckPacket.getFlag() == Flag.SYN_ACK && synAckPacket.getDest_addr() == remoteAddress.getHostAddress()) {
+    	/*if (synAckPacket.getFlag() == Flag.SYN_ACK && synAckPacket.getDest_addr() == remoteAddress.getHostAddress()) {
     		this.remoteAddress = remoteAddress.getHostAddress();
     		this.remotePort = remotePort;
-    	}
+    	}*/
 		state = State.ESTABLISHED;
 		stop = false;
     }
@@ -158,32 +170,45 @@ public class ConnectionImpl extends AbstractConnection {
     	
     	//Note: The listener connection should have a unique port we know will only be used for
     	//listening.
-    	
-    	
+
     	KtnDatagram connRequest = mySocket.receive(myPort);
-    	    	
+
     	if (connRequest.getFlag() == Flag.SYN) {
     		state = State.SYN_RCVD;
     		KtnDatagram synAck = constructInternalPacket(Flag.SYN_ACK);
     		synAck.setDest_addr(connRequest.getSrc_addr());
     		synAck.setDest_port(connRequest.getSrc_port());
-    		//TODO: Checksum stuff
     		
+    		//TODO: Checksum stuff
+
     		try {
-				mySocket.send(synAck);
+				mySocket.send(synAck);  //Send SYN_ACK
 			} catch (ClException e) {
 				e.printStackTrace();
 			}
     	}
-    	
-    	KtnDatagram ackPacket = receiveAck();
-    	
-    	if (ackPacket.getFlag() == Flag.ACK) {
-    		state = State.ESTABLISHED;
-    		stop = false;
-    	}
-    	
-    	return this;  //TODO put new shit here
+    	System.out.println("Trying to receive ACK");
+//		KtnDatagram ackPacket = receiveAck(); //Receive ACK for the SYN_ACK
+		KtnDatagram ackPacket = mySocket.receive(myPort); //Receive ACK for the SYN_ACK
+		System.out.println("ACK received" + ackPacket);
+		if (ackPacket.getFlag() == Flag.ACK) {
+			state = State.ESTABLISHED;
+			stop = false;
+		}
+    	/*try {
+    		KtnDatagram ackPacket = receiveAck(); //Receive ACK for the SYN_ACK
+    		
+    		if (ackPacket.getFlag() == Flag.ACK) {
+    			state = State.ESTABLISHED;
+    			stop = false;
+    		}
+		} catch (Exception e) {
+			state = State.LISTEN; //No ACK, go back to listenstate
+			System.out.println("No ACK!!! State: " + state.toString());
+		}*/
+    	Connection newConnection = new ConnectionImpl(InetAddress.getByName(myAddress), myPort, InetAddress.getByName(remoteAddress), remotePort, mySocket, state);
+    	state = State.LISTEN;
+    	return newConnection;  //TODO put new shit here
     }
 
     /**
